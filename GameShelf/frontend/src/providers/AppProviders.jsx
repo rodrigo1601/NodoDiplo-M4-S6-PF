@@ -4,7 +4,7 @@ import { DeveloperProvider } from "../context/developers/DeveloperProvider";
 import { GameProvider } from "../context/games/GameProvider";
 import { AuthProvider } from "../context/users/AuthProvider";
 import { UserGamesProvider } from "../context/userGames/UserGamesProvider";
-import { UserProvider } from "../context/users/userProvider";
+import { UserProvider } from "../context/users/UserProvider";
 import { ThemeProvider } from "../context/theme/ThemeProvider";
 
 const AppProviders = ({ children }) => {
