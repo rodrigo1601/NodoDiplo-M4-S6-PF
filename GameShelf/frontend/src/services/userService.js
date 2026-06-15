@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/users";
+const API_URL = "https://nododiplo-m4-s6-pf.onrender.com/api/users";
 
 export const getUsersRequest = () =>
     axios.get(API_URL);

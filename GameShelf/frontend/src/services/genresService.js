@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/genres";
+const API_URL = "https://nododiplo-m4-s6-pf.onrender.com/api/genres";
 
 export const getGenresRequest = () =>
     axios.get(API_URL);
