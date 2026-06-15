@@ -42,7 +42,7 @@ const Perfil = () => {
                             : "bg-gray-100 border-gray-200 text-gray-500 hover:bg-violet-50 hover:text-violet-500 hover:border-violet-300"
                         }`}
                 >
-                    <img src="/icons/settings.svg" alt="Settings" className="w-fit h-10" />
+                    <img src={`/icons/settings.svg" alt="Settings" className="w-fit h-10 ${isDark} ? "inverted" : ""`} />
                 </button>
             </div>
 

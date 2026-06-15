@@ -12,7 +12,7 @@ const ProfileSettings = ({ open, onClose, user, updateUser }) => {
                 <div className={`flex items-center justify-between px-6 py-4 border-b ${isDark ? "border-white/6" : "border-gray-100"}`}>
                     <div className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-                        <span className={`text-sm font-bold ${isDark ? "text-white" : "text-gray-900"}`}>Account settings</span>
+                        <span className={`text-sm font-bold ${isDark ? "text-white" : "text-gray-900"}`}>Configuracion del perfil</span>
                     </div>
                     <button
                         onClick={onClose}
@@ -26,7 +26,7 @@ const ProfileSettings = ({ open, onClose, user, updateUser }) => {
                     <UserForm
                         onSubmit={data => handleUpdateUser(user.id, data, updateUser, onClose)}
                         user={user}
-                        label="Save changes"
+                        label="Guardar cambios"
                         mode="edit"
                     />
                 </div>
