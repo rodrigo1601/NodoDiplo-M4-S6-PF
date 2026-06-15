@@ -7,6 +7,8 @@ const STATS = [
     { key: "progress", label: "En progreso",  filter: g => g.status === "En progreso" },
 ];
 
+//aca
+
 const ProfileStats = ({ userGames }) => {
     const { isDark } = useTheme();
     return (
