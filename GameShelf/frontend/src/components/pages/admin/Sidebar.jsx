@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { useTheme } from "../../../hooks/useTheme";
 
 const links = [
     { label: "Dashboard",       path: "/admin",            icon: "/icons/dashboard-alt.svg" },
@@ -11,11 +12,16 @@ const links = [
 
 const Sidebar = () => {
     const { pathname } = useLocation();
+    const { isDark } = useTheme();
 
     return (
-        <aside className="w-55 shrink-0 min-h-screen bg-[#0d0f14] border-r border-white/5 flex flex-col">
-            <div className="px-5 py-6 border-b border-white/5">
-                <p className="text-lg font-black tracking-tight text-white">GameShelf</p>
+        <aside className={`w-[220px] shrink-0 min-h-screen border-r flex flex-col transition-colors
+            ${isDark ? "bg-[#0d0f14] border-white/[0.05]" : "bg-white border-gray-200"}`}>
+
+            <div className={`px-5 py-6 border-b ${isDark ? "border-white/[0.05]" : "border-gray-200"}`}>
+                <p className={`text-lg font-black tracking-tight ${isDark ? "text-white" : "text-gray-900"}`}>
+                    GameShelf
+                </p>
                 <p className="text-[10px] font-bold tracking-widest uppercase text-cyan-500 mt-0.5">
                     Panel de administración
                 </p>
@@ -30,14 +36,16 @@ const Sidebar = () => {
                             to={path}
                             className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all
                                 ${active
-                                    ? "bg-cyan-500/15 text-cyan-400 border border-cyan-500/20"
-                                    : "text-gray-500 hover:bg-white/4 hover:text-gray-200"
+                                    ? "bg-cyan-500/15 text-cyan-500 border border-cyan-500/20"
+                                    : isDark
+                                        ? "text-gray-500 hover:bg-white/[0.04] hover:text-gray-200"
+                                        : "text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                                 }`}
                         >
                             <img
                                 src={icon}
                                 alt=""
-                                className={`h-4 w-auto invert ${active ? "opacity-100" : "opacity-50"}`}
+                                className={`h-4 w-auto ${isDark ? "invert" : ""} ${active ? "opacity-100" : "opacity-50"}`}
                             />
                             {label}
                         </Link>
@@ -45,10 +53,11 @@ const Sidebar = () => {
                 })}
             </nav>
 
-            <div className="p-3 border-t border-white/5">
+            <div className={`p-3 border-t ${isDark ? "border-white/[0.05]" : "border-gray-200"}`}>
                 <Link
                     to="/"
-                    className="flex items-center justify-center gap-2 w-full py-2 rounded-lg text-[12px] font-medium text-gray-600 hover:text-gray-300 hover:bg-white/4 transition-all"
+                    className={`flex items-center justify-center gap-2 w-full py-2 rounded-lg text-[12px] font-medium transition-all
+                        ${isDark ? "text-gray-600 hover:text-gray-300 hover:bg-white/[0.04]" : "text-gray-400 hover:text-gray-700 hover:bg-gray-100"}`}
                 >
                     ← Volver a la tienda
                 </Link>
