@@ -15,7 +15,9 @@ const AdminPagination = ({ page, totalPages, totalItems, pageSize, goTo, next, p
     return (
         <div className="flex items-center justify-between mt-4 px-1 flex-wrap gap-3">
             <span className="text-xs text-gray-600">
-                Showing <span className="text-gray-400 font-semibold">{from}–{to}</span> of{" "}
+                Mostrando{" "}
+                <span className="text-gray-400 font-semibold">{from}–{to}</span>
+                {" "}de{" "}
                 <span className="text-cyan-500 font-semibold">{totalItems}</span>
             </span>
 
@@ -24,21 +26,21 @@ const AdminPagination = ({ page, totalPages, totalItems, pageSize, goTo, next, p
                     onClick={prev}
                     disabled={!hasPrev}
                     className="text-[11px] px-2.5 py-1.5 rounded-md border border-white/[0.07] text-gray-500
-                               hover:border-cyan-500/40 hover:text-cyan-400 hover:bg-cyan-500/10
+                               hover:border-cyan-500/40 hover:text-cyan-400 hover:bg-cyan-500/10 cursor-pointer
                                disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-white/[0.07]
                                disabled:hover:text-gray-500 disabled:hover:bg-transparent transition-all"
                 >
-                    ← Prev
+                    ← Anterior
                 </button>
 
                 {pages.map((p, i) =>
                     p === "..." ? (
-                        <span key={`ellipsis-${i}`} className="text-[11px] text-gray-600 px-1">…</span>
+                        <span key={`e-${i}`} className="text-[11px] text-gray-600 px-1">…</span>
                     ) : (
                         <button
                             key={p}
                             onClick={() => goTo(p)}
-                            className={`text-[11px] w-7 h-7 rounded-md border transition-all
+                            className={`text-[11px] w-7 h-7 rounded-md border transition-all cursor-pointer
                                 ${p === page
                                     ? "border-cyan-500/40 text-cyan-400 bg-cyan-500/10"
                                     : "border-white/[0.07] text-gray-500 hover:border-cyan-500/40 hover:text-cyan-400 hover:bg-cyan-500/10"
@@ -53,11 +55,11 @@ const AdminPagination = ({ page, totalPages, totalItems, pageSize, goTo, next, p
                     onClick={next}
                     disabled={!hasNext}
                     className="text-[11px] px-2.5 py-1.5 rounded-md border border-white/[0.07] text-gray-500
-                               hover:border-cyan-500/40 hover:text-cyan-400 hover:bg-cyan-500/10
+                               hover:border-cyan-500/40 hover:text-cyan-400 hover:bg-cyan-500/10 cursor-pointer
                                disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-white/[0.07]
                                disabled:hover:text-gray-500 disabled:hover:bg-transparent transition-all"
                 >
-                    Next →
+                    Siguiente →
                 </button>
             </div>
         </div>

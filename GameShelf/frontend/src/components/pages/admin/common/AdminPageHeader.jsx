@@ -11,7 +11,7 @@ const AdminPageHeader = ({ title, subtitle, buttonText, onClick }) => (
         {buttonText && (
             <button
                 onClick={onClick}
-                className="text-sm px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-semibold transition-colors"
+                className="text-sm px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-semibold transition-colors cursor-pointer"
             >
                 {buttonText}
             </button>

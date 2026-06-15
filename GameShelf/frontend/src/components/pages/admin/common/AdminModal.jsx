@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 const AdminModal = ({ open, title, children, onClose }) => {
-    // Cerrar con Escape
     useEffect(() => {
         if (!open) return;
         const handler = (e) => { if (e.key === "Escape") onClose(); };
@@ -17,7 +16,6 @@ const AdminModal = ({ open, title, children, onClose }) => {
             onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
         >
             <div className="bg-[#0d0f14] border border-white/8 rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-                {/* Header */}
                 <div className="flex items-center justify-between px-6 py-4 border-b border-white/6">
                     <div className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
@@ -25,12 +23,11 @@ const AdminModal = ({ open, title, children, onClose }) => {
                     </div>
                     <button
                         onClick={onClose}
-                        className="text-gray-600 hover:text-gray-300 text-lg leading-none transition-colors w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/5"
+                        className="text-gray-600 hover:text-gray-300 text-lg leading-none transition-colors w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/5 cursor-pointer"
                     >
                         ✕
                     </button>
                 </div>
-                {/* Body */}
                 <div className="px-6 py-5">
                     {children}
                 </div>
