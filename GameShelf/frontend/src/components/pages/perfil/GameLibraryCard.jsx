@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../../../hooks/useTheme";
 import ConfirmModal from "../../common/ConfirmModal";
+import LoadGame from "../../layout/LoadGame";
 
 const RATINGS  = ["Excelente", "Recomendado", "Meh", "Skip"];
 const STATUSES = ["Jugado", "En progreso", "Pendiente", "Abandonado"];
@@ -49,6 +50,7 @@ const GameLibraryCard = ({ userGame, onUpdate, onDelete }) => {
     const { isDark } = useTheme();
     const [editField, setEditField] = useState(null);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [launchingGame, setLaunchingGame] = useState(null);
 
     const handleSave = async (field, value) => {
         await onUpdate(userGame._id, { [field]: value });
@@ -92,12 +94,20 @@ const GameLibraryCard = ({ userGame, onUpdate, onDelete }) => {
                             ${isDark ? "border-white/7 text-gray-500" : "border-gray-200 text-gray-400"}`}
                     >Estado</button>
                     <button
+                        onClick={() => setLaunchingGame(userGame)}
+                        className={`text-[11px] px-2 py-0.5 rounded-md border transition-all cursor-pointer ml-auto
+                            hover:border-green-500/40 hover:text-green-400 hover:bg-green-500/10
+                            ${isDark ? "border-white/7 text-gray-500" : "border-gray-200 text-gray-400"}`}
+                    >Jugar</button>
+                    <button
                         onClick={() => setShowConfirm(true)}
                         className={`text-[11px] px-2 py-0.5 rounded-md border transition-all cursor-pointer ml-auto
                             hover:border-red-500/40 hover:text-red-400 hover:bg-red-500/10
                             ${isDark ? "border-white/7 text-gray-500" : "border-gray-200 text-gray-400"}`}
                     >Remover</button>
                 </div>
+
+                <LoadGame  launchingGame={launchingGame} setLaunchingGame={setLaunchingGame}/>
 
                 <ConfirmModal
                     open={showConfirm}
