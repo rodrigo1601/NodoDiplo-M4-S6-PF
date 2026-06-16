@@ -1,21 +1,21 @@
-import axios from "axios";
+import axiosAuth from "./axiosInstance";
 
-const API_URL = "https://nododiplo-m4-s6-pf.onrender.com/api/userGames";
+const API_URL = "/userGames";
 
 export const getUserGamesRequest = () =>
-    axios.get(API_URL);
+    axiosAuth.get(API_URL);
 
 export const getUserGameByIdRequest = (id) =>
-    axios.get(`${API_URL}/userGamesPorId/${id}`);
+    axiosAuth.get(`${API_URL}/userGamesPorId/${id}`);
 
 export const getUserGamesByUserRequest = (userId) =>
-    axios.get(`${API_URL}/userGamesPorUsuario/${userId}`);
+    axiosAuth.get(`${API_URL}/userGamesPorUsuario/${userId}`);
 
 export const createUserGameRequest = (userGame) => 
-    axios.post(`${API_URL}/crearUserGame`, userGame);
+    axiosAuth.post(`${API_URL}/crearUserGame`, userGame);
 
 export const updateUserGameRequest = (id, userGame) =>
-    axios.put(`${API_URL}/actualizarUserGame/${id}`, userGame);
+    axiosAuth.put(`${API_URL}/actualizarUserGame/${id}`, userGame);
 
 export const deleteUserGameRequest = (id) =>
-    axios.delete(`${API_URL}/eliminarUserGame/${id}`);
+    axiosAuth.delete(`${API_URL}/eliminarUserGame/${id}`);

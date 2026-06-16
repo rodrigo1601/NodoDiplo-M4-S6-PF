@@ -6,13 +6,13 @@ const GenericTable = ({ data, setSelected, seteditingStatus, handleActivate, act
     const { isDark } = useTheme();
     const [selectedItem, setSelectedItem] = useState(null);
 
-    const rowHover  = isDark ? "hover:bg-white/[0.02]" : "hover:bg-gray-50";
-    const borderCol = isDark ? "border-white/[0.06]" : "border-gray-200";
-    const borderRow = isDark ? "border-white/[0.04]" : "border-gray-100";
+    const rowHover  = isDark ? "hover:bg-white/2" : "hover:bg-gray-50";
+    const borderCol = isDark ? "border-white/6" : "border-gray-200";
+    const borderRow = isDark ? "border-white/4" : "border-gray-100";
     const thText    = isDark ? "text-gray-600" : "text-gray-400";
-    const headBg    = isDark ? "bg-white/[0.02]" : "bg-gray-50";
+    const headBg    = isDark ? "bg-white/2" : "bg-gray-50";
     const nameText  = isDark ? "text-gray-200" : "text-gray-800";
-    const emptyBg   = isDark ? "bg-white/[0.04]" : "bg-gray-100";
+    const emptyBg   = isDark ? "bg-white/4" : "bg-gray-100";
 
     return (
         <>
@@ -41,7 +41,7 @@ const GenericTable = ({ data, setSelected, seteditingStatus, handleActivate, act
                                 </td>
                                 <td className="px-4 py-3">
                                     <span className={`text-[11px] font-bold px-2 py-0.5 rounded-md
-                                        ${item.isActive ? "text-green-400 bg-green-400/10" : isDark ? "text-gray-500 bg-white/[0.04]" : "text-gray-400 bg-gray-100"}`}>
+                                        ${item.isActive ? "text-green-400 bg-green-400/10" : isDark ? "text-gray-500 bg-white/4" : "text-gray-400 bg-gray-100"}`}>
                                         {item.isActive ? "Activo" : "Inactivo"}
                                     </span>
                                 </td>
@@ -51,7 +51,7 @@ const GenericTable = ({ data, setSelected, seteditingStatus, handleActivate, act
                                             onClick={() => { setSelected(item); seteditingStatus(true); }}
                                             className={`text-[11px] px-2.5 py-1 rounded-md border transition-all cursor-pointer
                                                 ${isDark
-                                                    ? "border-white/[0.07] text-gray-500 hover:border-cyan-500/40 hover:text-cyan-400 hover:bg-cyan-500/10"
+                                                    ? "border-white/7 text-gray-500 hover:border-cyan-500/40 hover:text-cyan-400 hover:bg-cyan-500/10"
                                                     : "border-gray-200 text-gray-500 hover:border-cyan-400 hover:text-cyan-600 hover:bg-cyan-50"
                                                 }`}
                                         >
@@ -62,10 +62,10 @@ const GenericTable = ({ data, setSelected, seteditingStatus, handleActivate, act
                                             className={`text-[11px] px-2.5 py-1 rounded-md border transition-all cursor-pointer
                                                 ${item.isActive
                                                     ? isDark
-                                                        ? "border-white/[0.07] text-gray-500 hover:border-red-500/40 hover:text-red-400 hover:bg-red-500/10"
+                                                        ? "border-white/7 text-gray-500 hover:border-red-500/40 hover:text-red-400 hover:bg-red-500/10"
                                                         : "border-gray-200 text-gray-500 hover:border-red-400 hover:text-red-500 hover:bg-red-50"
                                                     : isDark
-                                                        ? "border-white/[0.07] text-gray-500 hover:border-green-500/40 hover:text-green-400 hover:bg-green-500/10"
+                                                        ? "border-white/7 text-gray-500 hover:border-green-500/40 hover:text-green-400 hover:bg-green-500/10"
                                                         : "border-gray-200 text-gray-500 hover:border-green-400 hover:text-green-600 hover:bg-green-50"
                                                 }`}
                                         >

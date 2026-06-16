@@ -1,15 +1,15 @@
-import axios from "axios";
+import axiosAuth from "./axiosInstance";
 
-const API_URL = "https://nododiplo-m4-s6-pf.onrender.com/api/genres";
+const API_URL = "/genres";
 
 export const getGenresRequest = () =>
-    axios.get(API_URL);
+    axiosAuth.get(API_URL);
 
 export const uploadGenreRequest = (formData) =>
-    axios.post(`${API_URL}/crearGenero`, formData);
+    axiosAuth.post(`${API_URL}/crearGenero`, formData);
 
 export const updateGenreRequest = (id, genre) =>
-    axios.put(`${API_URL}/actualizarGenero/${id}`, genre);
+    axiosAuth.put(`${API_URL}/actualizarGenero/${id}`, genre);
 
 export const activateGenreRequest = (id, status) =>
-    axios.put(`${API_URL}/desactivar/${id}`, {isActive: status});
+    axiosAuth.put(`${API_URL}/desactivar/${id}`, {isActive: status});

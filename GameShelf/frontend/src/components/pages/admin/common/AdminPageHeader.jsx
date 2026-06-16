@@ -4,7 +4,7 @@ const AdminPageHeader = ({ title, subtitle, buttonText, onClick }) => {
     const { isDark } = useTheme();
     return (
         <div className={`border-b px-6 py-6 flex items-center justify-between transition-colors
-            ${isDark ? "border-white/[0.04]" : "border-gray-200"}`}>
+            ${isDark ? "border-white/4" : "border-gray-200"}`}>
             <div>
                 <div className="flex items-center gap-2 mb-1">
                     <div className="w-1.5 h-1.5 rounded-full bg-cyan-500" />

@@ -19,9 +19,9 @@ const AdminModal = ({ open, title, children, onClose }) => {
             onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
         >
             <div className={`border rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl
-                ${isDark ? "bg-[#0d0f14] border-white/[0.08]" : "bg-white border-gray-200"}`}>
+                ${isDark ? "bg-[#0d0f14] border-white/8" : "bg-white border-gray-200"}`}>
                 <div className={`flex items-center justify-between px-6 py-4 border-b
-                    ${isDark ? "border-white/[0.06]" : "border-gray-100"}`}>
+                    ${isDark ? "border-white/6" : "border-gray-100"}`}>
                     <div className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
                         <h2 className={`text-base font-bold ${isDark ? "text-white" : "text-gray-900"}`}>{title}</h2>
@@ -29,7 +29,7 @@ const AdminModal = ({ open, title, children, onClose }) => {
                     <button
                         onClick={onClose}
                         className={`text-lg leading-none transition-colors w-7 h-7 flex items-center justify-center rounded-lg cursor-pointer
-                            ${isDark ? "text-gray-600 hover:text-gray-300 hover:bg-white/[0.05]" : "text-gray-400 hover:text-gray-700 hover:bg-gray-100"}`}
+                            ${isDark ? "text-gray-600 hover:text-gray-300 hover:bg-white/5" : "text-gray-400 hover:text-gray-700 hover:bg-gray-100"}`}
                     >
                         ✕
                     </button>

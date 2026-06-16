@@ -15,10 +15,10 @@ const Sidebar = () => {
     const { isDark } = useTheme();
 
     return (
-        <aside className={`w-[220px] shrink-0 min-h-screen border-r flex flex-col transition-colors
-            ${isDark ? "bg-[#0d0f14] border-white/[0.05]" : "bg-white border-gray-200"}`}>
+        <aside className={`w-55 shrink-0 min-h-screen border-r flex flex-col transition-colors
+            ${isDark ? "bg-[#0d0f14] border-white/5" : "bg-white border-gray-200"}`}>
 
-            <div className={`px-5 py-6 border-b ${isDark ? "border-white/[0.05]" : "border-gray-200"}`}>
+            <div className={`px-5 py-6 border-b ${isDark ? "border-white/5" : "border-gray-200"}`}>
                 <p className={`text-lg font-black tracking-tight ${isDark ? "text-white" : "text-gray-900"}`}>
                     GameShelf
                 </p>
@@ -38,7 +38,7 @@ const Sidebar = () => {
                                 ${active
                                     ? "bg-cyan-500/15 text-cyan-500 border border-cyan-500/20"
                                     : isDark
-                                        ? "text-gray-500 hover:bg-white/[0.04] hover:text-gray-200"
+                                        ? "text-gray-500 hover:bg-white/4 hover:text-gray-200"
                                         : "text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                                 }`}
                         >
@@ -53,11 +53,11 @@ const Sidebar = () => {
                 })}
             </nav>
 
-            <div className={`p-3 border-t ${isDark ? "border-white/[0.05]" : "border-gray-200"}`}>
+            <div className={`p-3 border-t ${isDark ? "border-white/5" : "border-gray-200"}`}>
                 <Link
                     to="/"
                     className={`flex items-center justify-center gap-2 w-full py-2 rounded-lg text-[12px] font-medium transition-all
-                        ${isDark ? "text-gray-600 hover:text-gray-300 hover:bg-white/[0.04]" : "text-gray-400 hover:text-gray-700 hover:bg-gray-100"}`}
+                        ${isDark ? "text-gray-600 hover:text-gray-300 hover:bg-white/4" : "text-gray-400 hover:text-gray-700 hover:bg-gray-100"}`}
                 >
                     ← Volver a la tienda
                 </Link>

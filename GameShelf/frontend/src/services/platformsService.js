@@ -1,15 +1,15 @@
-import axios from "axios";
+import axiosAuth from "./axiosInstance";
 
-const API_URL = "https://nododiplo-m4-s6-pf.onrender.com/api/platforms";
+const API_URL = "/platforms";
 
 export const getPlatformsRequest = () =>
-    axios.get(API_URL);
+    axiosAuth.get(API_URL);
 
 export const uploadPlatformRequest = (formData) =>
-    axios.post(`${API_URL}/crearPlataforma`, formData);
+    axiosAuth.post(`${API_URL}/crearPlataforma`, formData);
 
 export const updatePlatformRequest = (id, platform) =>
-    axios.put(`${API_URL}/actualizarPlataforma/${id}`, platform);
+    axiosAuth.put(`${API_URL}/actualizarPlataforma/${id}`, platform);
 
 export const activatePlatformRequest = (id, status) =>
-    axios.put(`${API_URL}/desactivar/${id}`, {isActive: status});
+    axiosAuth.put(`${API_URL}/desactivar/${id}`, {isActive: status});

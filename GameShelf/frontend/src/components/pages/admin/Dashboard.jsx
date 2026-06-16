@@ -36,7 +36,7 @@ const Dashboard = () => {
             <div className="p-6 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
                 {STAT_CARDS.map(({ label, color, key }) => (
                     <div key={key} className={`border rounded-xl px-4 py-4 transition-colors
-                        ${isDark ? "bg-[#0d0f14] border-white/[0.06]" : "bg-white border-gray-200"}`}>
+                        ${isDark ? "bg-[#0d0f14] border-white/6" : "bg-white border-gray-200"}`}>
                         <p className={`text-[10px] font-bold tracking-widest uppercase mb-2 ${isDark ? "text-gray-600" : "text-gray-400"}`}>{label}</p>
                         <p className={`text-2xl font-black px-2 py-0.5 rounded-md w-fit ${color}`}>{stats[key]}</p>
                     </div>

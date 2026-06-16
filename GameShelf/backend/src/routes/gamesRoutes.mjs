@@ -1,7 +1,8 @@
 import express from 'express';
 import upload from '../middlewares/uploadMiddleware.mjs';
 import { validarJuego, validarId } from '../validation/validationRules.mjs';
-import { handleValidationErrors } from '../validation/errorMiddleware.mjs';
+import { verificarToken, soloAdmin } from '../middlewares/authMiddleware.mjs';
+import { handleValidationErrors } from '../middlewares/errorMiddleware.mjs';
 import { obtenerTodosController, obtenerJuegoPorIdController, obtenerJuegoPorSlugController, obtenerJuegosPorTypeYSlugController, crearJuegoController, actualizarJuegoController, eliminarJuegoController } from '../controllers/gamesController.mjs';
 
 
@@ -12,7 +13,8 @@ router.get('/juegosPorId/:id', obtenerJuegoPorIdController);
 router.get('/juegoPorSlug/:slug', obtenerJuegoPorSlugController);
 router.get('/juegosPorTypeYSlug/:type/:slug', obtenerJuegosPorTypeYSlugController);
 
-router.post("/crearJuego", upload.fields([
+router.post("/crearJuego", verificarToken, soloAdmin,
+    upload.fields([
         { name: "portada", maxCount: 1 },
         { name: "images", maxCount: 10 }
     ]),
@@ -21,7 +23,8 @@ router.post("/crearJuego", upload.fields([
     crearJuegoController
 );
 
-router.put('/actualizarJuego/:id', upload.fields([
+router.put('/actualizarJuego/:id', verificarToken, soloAdmin,
+    upload.fields([
         { name: "portada", maxCount: 1 },
         { name: "images", maxCount: 10 }
     ]),

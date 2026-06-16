@@ -20,7 +20,7 @@ const UsersPage = () => {
             <div className="p-6">
                 {allUsers.length === 0 ? (
                     <div className={`flex flex-col items-center justify-center py-20 text-center border rounded-xl
-                        ${isDark ? "bg-white/[0.02] border-white/[0.06]" : "bg-white border-gray-200"}`}>
+                        ${isDark ? "bg-white/2 border-white/6" : "bg-white border-gray-200"}`}>
                         <p className={`font-semibold text-sm ${isDark ? "text-gray-400" : "text-gray-500"}`}>Sin usuarios aún</p>
                         <p className={`text-xs mt-1 ${isDark ? "text-gray-600" : "text-gray-400"}`}>Creá el primer usuario para empezar.</p>
                     </div>

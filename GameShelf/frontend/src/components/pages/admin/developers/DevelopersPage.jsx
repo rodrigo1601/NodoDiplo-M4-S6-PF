@@ -9,7 +9,7 @@ import GenericTable from "../common/GenericTable";
 
 const EmptyState = ({ message, isDark }) => (
     <div className={`flex items-center justify-center py-12 border rounded-xl
-        ${isDark ? "bg-white/[0.02] border-white/[0.06]" : "bg-white border-gray-200"}`}>
+        ${isDark ? "bg-white/2 border-white/6" : "bg-white border-gray-200"}`}>
         <p className={`text-sm ${isDark ? "text-gray-600" : "text-gray-400"}`}>{message}</p>
     </div>
 );
