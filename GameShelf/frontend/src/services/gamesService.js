@@ -16,3 +16,6 @@ export const uploadGameRequest = (formData) =>
 
 export const updateGameRequest = (id, game) =>
     axiosAuth.put(`${API_URL}/actualizarJuego/${id}`, game);
+
+export const activateGameRequest = (id, status) =>
+    axiosAuth.put(`${API_URL}/desactivar/${id}`, {isActive: status});

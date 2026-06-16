@@ -1,23 +1,25 @@
 import { notifySuccess, notifyError } from "../toast";
 
-async function handleAddPlatform (platformData, createPlatform) {
+async function handleAddPlatform (platformData, createPlatform, onSuccess) {
 
     const result = await createPlatform(platformData);
 
         if (result.success) {
             notifySuccess(`Plataforma "${platformData.nombre}" agregada!`);
+            onSuccess?.();
         } else {
             notifyError(result.message || "Error al agregar la plataforma.");
         }
     
 };
 
-async function handleEditPlatform (id, platformData, updatePlatform) {
+async function handleEditPlatform (id, platformData, updatePlatform, onSuccess) {
 
     const result = await updatePlatform(id, platformData);
 
         if (result.success) {
             notifySuccess(`Plataforma "${platformData.nombre}" actualizada!`);
+            onSuccess?.();
         } else {
             notifyError(result.message || "Error al actualizar la plataforma.");
         }

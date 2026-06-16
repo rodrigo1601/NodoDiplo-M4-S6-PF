@@ -6,7 +6,7 @@ import { useTheme } from "../../../../hooks/useTheme";
 import { handleDeleteFromCollection } from "../../../../utils/handleGame";
 import Sidebar from "../../../layout/Sidebar";
 import GameLibraryCard from "../GameLibraryCard";
-import LoadingSpinner from "../../../common/LoadingSpinnes";
+import LoadingSpinner from "../../../common/LoadingSpinner";
 import { usePagination } from "../../../../hooks/UsePagination";
 import Pagination from "../../../layout/Pagination";
 

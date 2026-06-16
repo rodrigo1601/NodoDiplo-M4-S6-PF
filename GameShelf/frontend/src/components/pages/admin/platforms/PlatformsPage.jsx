@@ -6,10 +6,12 @@ import { handleAddPlatform, handleEditPlatform, handleActivatePlatform } from ".
 import AdminPageHeader from "../common/AdminPageHeader";
 import AdminModal from "../common/AdminModal";
 import GenericTable from "../common/GenericTable";
+import AdminPageSkeleton from "../../../common/AdminPageSkeleton";
+import LoadingOverlay from "../../../common/LoadingOverlay";
 
 const PlatformsPage = () => {
     const { isDark } = useTheme();
-    const { allPlatforms, createPlatform, updatePlatform, activatePlatform } = usePlatforms();
+    const { allPlatforms, loading, actionLoading, actionMessage, createPlatform, updatePlatform, activatePlatform } = usePlatforms();
     const [creatingStatus, setCreatingStatus] = useState(false);
     const [editingStatus, setEditingStatus] = useState(false);
     const [selectedPlatform, setSelectedPlatform] = useState(null);
@@ -19,6 +21,8 @@ const PlatformsPage = () => {
 
     const emptyClass = `flex items-center justify-center py-12 border rounded-xl ${isDark ? "bg-white/[0.02] border-white/[0.06]" : "bg-white border-gray-200"}`;
     const emptyText  = isDark ? "text-gray-600" : "text-gray-400";
+
+    if (loading) return <AdminPageSkeleton /> 
 
     return (
         <div className={`min-h-screen font-sans transition-colors ${isDark ? "bg-[#0a0c10] text-white" : "bg-gray-100 text-gray-900"}`}>
@@ -54,6 +58,10 @@ const PlatformsPage = () => {
             <AdminModal open={editingStatus} title="Editar plataforma" onClose={() => setEditingStatus(false)}>
                 <PlatformForm label="Guardar cambios" platform={selectedPlatform} onSubmit={(data) => handleEditPlatform(selectedPlatform._id, data, updatePlatform, () => setEditingStatus(false))} />
             </AdminModal>
+            <LoadingOverlay
+                open={actionLoading}
+                message={actionMessage}
+            />
         </div>
     );
 };

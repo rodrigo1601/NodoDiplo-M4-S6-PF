@@ -235,22 +235,24 @@ export async function actualizarJuegoController(req, res) {
     }
 }
 
-export async function eliminarJuegoController(req, res) {
+export async function desactivarJuegoController(req, res) {
     try {
         const { id } = req.params;
+        const { isActive }  = req.body;
 
-        const juegoEliminado = await eliminarJuego(id);
+        const existe = obtenerJuegoPorId(id);
 
-        if (!juegoEliminado) {
-            return res.status(404).send({ mensaje: "Juego no encontrado para eliminar" });
+        if (existe.lenght === 0) {
+            return res.status(404).send({ mensaje: 'Juego no encontrado para actualizar' });
         }
+        const juegoDesactivado = await actualizarJuego(id, {isActive: isActive});
 
         res.status(200).json({
-            mensaje: "Juego eliminado correctamente",
-            juego: juegoEliminado
+            mensaje: "Juego desactivado correctamente",
+            juego: juegoDesactivado
         });
 
     } catch (error) {
-        res.status(500).send({ mensaje: "Error al eliminar el juego", error: error.message });
+        res.status(500).send({ mensaje: "Error al desactivar el juego", error: error.message });
     }
 }

@@ -24,22 +24,18 @@ async function handleEditGame (id, gameData, updateGame) {
     
 };
 
-async function handleDeleteFromCollection (user, userGame, deleteUserGame) {
+async function handleActivateGame (game, ActivateGame) {
 
-    if (!user) {
-        notifyError("Debes iniciar sesión para eliminar juegos de tu colección.");
-        return;
-    }
+    const result = await ActivateGame(game._id, !game.isActive);
 
-    const result = await deleteUserGame(userGame._id);
+    const status = !game.isActive ? "activad" : "desactivado";
+    const statusText = !game.isActive ? "activar" : "desactivar";
 
     if (result.success) {
-        notifySuccess(`Juego "${userGame.gameId.nombre}" eliminado de tu colección!`);
+        notifySuccess(`Juego "${game.nombre}" ${status}!`);
     } else {
-        notifyError(result.message || "Error al eliminar el juego de tu colección.");
+        notifyError(result.message || `Error al ${statusText} el juego.`);
     }
 };
 
-
-
-export { handleAddGame, handleEditGame, handleDeleteFromCollection };
+export { handleAddGame, handleEditGame, handleActivateGame };

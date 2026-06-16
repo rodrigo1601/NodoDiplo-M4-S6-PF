@@ -9,6 +9,8 @@ export const UserProvider = ({ children }) => {
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState(false);
+    const [actionMessage, setActionMessage] = useState("");
 
     useEffect(() => {
 
@@ -33,6 +35,9 @@ export const UserProvider = ({ children }) => {
     const createUser = async (data) => {
         try {
             
+            setActionLoading(true);
+            setActionMessage("Creando usuario...");
+            
             const formData = new FormData();
             
             formData.append("username", data.username);
@@ -56,14 +61,17 @@ export const UserProvider = ({ children }) => {
         } catch (error) {
             console.error("Error en registro:", error);
             return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+        } finally {
+            setActionLoading(false);
         }
     };
 
     const updateUser = async (id, userData) => {
             try {
     
-                setLoading(true);
-    
+                setActionLoading(true);
+                setActionMessage("Actualizando usuario...");
+
                 const formData = new FormData();
                 
                 formData.append("username", userData.username);
@@ -94,13 +102,15 @@ export const UserProvider = ({ children }) => {
                 console.error("Error al actualizar usuario:", error);
                 return { success: false, message: error.response?.data?.mensaje || "Error al actualizar usuario" };
             }finally{
-                setLoading(false);
+                setActionLoading(false);
             }
     };
 
     const activateUser = async (id, status) => {
                         try {
             
+                            setActionMessage(status ? "Activando usuario..." : "Desactivando usuario...");
+                            setActionLoading(true);
                             const formData = new FormData();
             
                             formData.append("isActive", status);
@@ -121,6 +131,8 @@ export const UserProvider = ({ children }) => {
                         } catch (error) {
                             console.error("Error en registro:", error);
                             return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+                        } finally { 
+                            setActionLoading(false);
                         }
     };
 
@@ -129,6 +141,8 @@ export const UserProvider = ({ children }) => {
             users: activeUsers,
             allUsers,
             loading,
+            actionLoading,
+            actionMessage,
             createUser,
             updateUser,
             activateUser

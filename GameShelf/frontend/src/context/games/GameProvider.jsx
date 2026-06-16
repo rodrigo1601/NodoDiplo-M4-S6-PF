@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 
 import { GameContext } from "./GameContext";
 
-import { getGamesRequest, uploadGameRequest, updateGameRequest } from "../../services/gamesService";
+import { getGamesRequest, uploadGameRequest, updateGameRequest, activateGameRequest } from "../../services/gamesService";
 
 export const GameProvider = ({ children }) => {
 
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState(false);
+    const [actionMessage, setActionMessage] = useState("");
 
     useEffect(() => {
 
@@ -26,9 +28,15 @@ export const GameProvider = ({ children }) => {
 
     }, []);
 
+    const activeGames = games.filter(g => g.isActive);
+    const allGames = games;
+
     const createGame = async (data) => {
                 try {
 
+                    setActionLoading(true);
+                    setActionMessage("Actualizandojuego...");
+                    
                     const formData = new FormData();
     
                     formData.append("nombre", data.nombre);
@@ -67,12 +75,17 @@ export const GameProvider = ({ children }) => {
                 } catch (error) {
                     console.error("Error en registro:", error);
                     return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+                } finally {
+                    setActionLoading(false);
                 }
     };
 
     const updateGame = async (id, data) => {
                     try {
         
+                        setActionLoading(true);
+                        setActionMessage("Actualizando juego...");
+                        
                         const formData = new FormData();
 
                         formData.append("nombre", data.nombre);
@@ -130,15 +143,51 @@ export const GameProvider = ({ children }) => {
                     } catch (error) {
                         console.error("Error en registro:", error);
                         return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+                    } finally {
+                        setActionLoading(false);
                     }
+    };
+
+    const activateGame = async (id, status) => {
+        try {
+                
+            setActionMessage(status ? "Activando juego..." : "Desactivando juego...");
+            setActionLoading(true);
+            const formData = new FormData();
+                
+            formData.append("isActive", status);
+                                
+            const res = await activateGameRequest(id, status);
+                    
+            const { juego } = res.data;
+                
+            setGames(prev =>
+                prev.map(game =>            
+                            game._id === juego._id
+                            ? juego
+                            : game
+                        )
+            );
+                
+            return { success: true };
+        } catch (error) {
+            console.error("Error en registro:", error);
+            return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+        } finally { 
+            setActionLoading(false);
+        }
     };
 
     return (
         <GameContext.Provider value={{
-            games,
+            games: activeGames,
+            allGames,
             loading,
+            actionLoading,
+            actionMessage,
             createGame,
-            updateGame
+            updateGame,
+            activateGame
         }}>
             {children}
         </GameContext.Provider>

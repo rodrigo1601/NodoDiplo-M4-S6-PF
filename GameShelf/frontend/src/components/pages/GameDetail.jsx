@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Sidebar from "../layout/Sidebar";
-import LoadingSpinner from "../common/LoadingSpinnes";
+import LoadingSpinner from "../common/LoadingSpinner";
 import { useGameBySlug } from "../../hooks/games/useGameBySlug";
 import { useAuth } from "../../hooks/users/useAuth";
 import { useUserGames } from "../../hooks/userGames/useUserGames";

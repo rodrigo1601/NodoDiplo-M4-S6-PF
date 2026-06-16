@@ -1,23 +1,25 @@
 import { notifySuccess, notifyError } from "../toast";
 
-async function handleAddDeveloper (developerData, createDeveloper) {
+async function handleAddDeveloper (developerData, createDeveloper, onSuccess) {
 
     const result = await createDeveloper(developerData);
 
         if (result.success) {
             notifySuccess(`Desarrollador "${developerData.nombre}" agregado!`);
+            onSuccess?.();
         } else {
             notifyError(result.message || "Error al agregar el desarrollador.");
         }
     
 };
 
-async function handleEditDeveloper (id, developerData, updateDeveloper) {
+async function handleEditDeveloper (id, developerData, updateDeveloper, onSuccess) {
 
     const result = await updateDeveloper(id, developerData);
 
         if (result.success) {
             notifySuccess(`Desarrollador "${developerData.nombre}" actualizado!`);
+            onSuccess?.();
         } else {
             notifyError(result.message || "Error al actualizar el desarrollador.");
         }

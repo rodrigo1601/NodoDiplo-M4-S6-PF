@@ -6,10 +6,12 @@ import { handleAddGenre, handleEditGenre, handleActivateGenre } from "../../../.
 import AdminPageHeader from "../common/AdminPageHeader";
 import AdminModal from "../common/AdminModal";
 import GenericTable from "../common/GenericTable";
+import AdminPageSkeleton from "../../../common/AdminPageSkeleton";
+import LoadingOverlay from "../../../common/LoadingOverlay";
 
 const GenresPage = () => {
     const { isDark } = useTheme();
-    const { allGenres, createGenre, updateGenre, activateGenre } = useGenres();
+    const { allGenres, loading, actionLoading, actionMessage, createGenre, updateGenre, activateGenre } = useGenres();
     const [creatingStatus, setCreatingStatus] = useState(false);
     const [editingStatus, setEditingStatus] = useState(false);
     const [selectedGenre, setSelectedGenre] = useState(null);
@@ -19,6 +21,8 @@ const GenresPage = () => {
 
     const emptyClass = `flex items-center justify-center py-12 border rounded-xl ${isDark ? "bg-white/[0.02] border-white/[0.06]" : "bg-white border-gray-200"}`;
     const emptyText  = isDark ? "text-gray-600" : "text-gray-400";
+
+    if (loading) return <AdminPageSkeleton /> 
 
     return (
         <div className={`min-h-screen font-sans transition-colors ${isDark ? "bg-[#0a0c10] text-white" : "bg-gray-100 text-gray-900"}`}>
@@ -54,7 +58,11 @@ const GenresPage = () => {
             <AdminModal open={editingStatus} title="Editar género" onClose={() => setEditingStatus(false)}>
                 <GenreForm label="Guardar cambios" genre={selectedGenre} onSubmit={(data) => handleEditGenre(selectedGenre._id, data, updateGenre, () => setEditingStatus(false))} />
             </AdminModal>
-        </div>
+            <LoadingOverlay
+                open={actionLoading}
+                message={actionMessage}
+            />
+        </div>        
     );
 };
 

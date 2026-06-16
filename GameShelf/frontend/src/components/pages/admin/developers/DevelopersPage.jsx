@@ -6,6 +6,8 @@ import { handleAddDeveloper, handleEditDeveloper, handleActivateDeveloper } from
 import AdminPageHeader from "../common/AdminPageHeader";
 import AdminModal from "../common/AdminModal";
 import GenericTable from "../common/GenericTable";
+import AdminPageSkeleton from "../../../common/AdminPageSkeleton";
+import LoadingOverlay from "../../../common/LoadingOverlay";
 
 const EmptyState = ({ message, isDark }) => (
     <div className={`flex items-center justify-center py-12 border rounded-xl
@@ -16,13 +18,15 @@ const EmptyState = ({ message, isDark }) => (
 
 const DevelopersPage = () => {
     const { isDark } = useTheme();
-    const { allDevelopers, createDeveloper, updateDeveloper, activateDeveloper } = useDevelopers();
+    const { allDevelopers, loading, actionLoading, actionMessage, createDeveloper, updateDeveloper, activateDeveloper } = useDevelopers();
     const [creatingStatus, setCreatingStatus] = useState(false);
     const [editingStatus, setEditingStatus] = useState(false);
     const [selectedDeveloper, setSelectedDeveloper] = useState(null);
 
     const activeDevelopers   = allDevelopers.filter(d => d.isActive);
     const inactiveDevelopers = allDevelopers.filter(d => !d.isActive);
+
+    if (loading) return <AdminPageSkeleton />
 
     return (
         <div className={`min-h-screen font-sans transition-colors ${isDark ? "bg-[#0a0c10] text-white" : "bg-gray-100 text-gray-900"}`}>
@@ -58,6 +62,10 @@ const DevelopersPage = () => {
             <AdminModal open={editingStatus} title="Editar desarrollador" onClose={() => setEditingStatus(false)}>
                 <DeveloperForm label="Guardar cambios" developer={selectedDeveloper} onSubmit={(data) => handleEditDeveloper(selectedDeveloper._id, data, updateDeveloper, () => setEditingStatus(false))} />
             </AdminModal>
+            <LoadingOverlay
+                open={actionLoading}
+                message={actionMessage}
+            />
         </div>
     );
 };

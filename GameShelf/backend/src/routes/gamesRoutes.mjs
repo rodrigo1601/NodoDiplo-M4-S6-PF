@@ -3,7 +3,7 @@ import upload from '../middlewares/uploadMiddleware.mjs';
 import { validarJuego, validarId } from '../validation/validationRules.mjs';
 import { verificarToken, soloAdmin } from '../middlewares/authMiddleware.mjs';
 import { handleValidationErrors } from '../middlewares/errorMiddleware.mjs';
-import { obtenerTodosController, obtenerJuegoPorIdController, obtenerJuegoPorSlugController, obtenerJuegosPorTypeYSlugController, crearJuegoController, actualizarJuegoController, eliminarJuegoController } from '../controllers/gamesController.mjs';
+import { obtenerTodosController, obtenerJuegoPorIdController, obtenerJuegoPorSlugController, obtenerJuegosPorTypeYSlugController, crearJuegoController, actualizarJuegoController, desactivarJuegoController } from '../controllers/gamesController.mjs';
 
 
 const router = express.Router();
@@ -33,6 +33,6 @@ router.put('/actualizarJuego/:id', verificarToken, soloAdmin,
     handleValidationErrors,
     actualizarJuegoController);
 
-router.delete('/eliminarJuego/:id', eliminarJuegoController);
+router.put('/desactivar/:id', verificarToken, soloAdmin, validarId(), handleValidationErrors, desactivarJuegoController);
 
 export default router;

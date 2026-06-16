@@ -5,7 +5,7 @@ import { handleAddToCollection } from "../../utils/handleGame";
 import { useUserGames } from "../../hooks/userGames/useUserGames";
 import { useAuth } from "../../hooks/users/useAuth";
 import { useTheme } from "../../hooks/useTheme";
-import LoadingSpinner from "./LoadingSpinnes";
+import LoadingSpinner from "./LoadingSpinner";
 import ConfirmModal from "./ConfirmModal";
 
 const formatDate = (dateStr) => {

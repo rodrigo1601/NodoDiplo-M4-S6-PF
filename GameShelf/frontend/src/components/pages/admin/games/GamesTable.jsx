@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { useTheme } from "../../../../hooks/useTheme";
+import ConfirmModal from "../../../common/ConfirmModal";
 
 const formatDate = (dateStr) => {
     if (!dateStr) return "—";
     return new Date(dateStr).toLocaleDateString("es-AR", { month: "short", day: "numeric", year: "numeric" });
 };
 
-const GameTable = ({ data, setSelected, seteditingStatus }) => {
+const GameTable = ({ data, setSelected, seteditingStatus, handleActivate, activate }) => {
     const { isDark } = useTheme();
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const borderCol = isDark ? "border-white/[0.06]" : "border-gray-200";
     const borderRow = isDark ? "border-white/[0.04]" : "border-gray-100";
@@ -18,11 +21,12 @@ const GameTable = ({ data, setSelected, seteditingStatus }) => {
     const emptyBg   = isDark ? "bg-white/[0.04]"      : "bg-gray-100";
 
     return (
+        <>
         <div className={`overflow-x-auto rounded-xl border ${borderCol}`}>
             <table className="w-full text-left">
                 <thead>
                     <tr className={`border-b ${borderCol} ${headBg}`}>
-                        {["Portada", "Nombre", "Fecha de salida", "Clasificación", "Acciones"].map(h => (
+                        {["Portada", "Nombre", "Fecha de salida", "Clasificación", "Estado", "Acciones"].map(h => (
                             <th key={h} className={`px-4 py-3 text-[11px] font-bold tracking-widest uppercase ${thText}`}>
                                 {h}
                             </th>
@@ -53,6 +57,12 @@ const GameTable = ({ data, setSelected, seteditingStatus }) => {
                                 </span>
                             </td>
                             <td className="px-4 py-3">
+                                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-md
+                                    ${item.isActive ? "text-green-400 bg-green-400/10" : isDark ? "text-gray-500 bg-white/4" : "text-gray-400 bg-gray-100"}`}>
+                                    {item.isActive ? "Activo" : "Inactivo"}
+                                </span>
+                            </td>
+                            <td className="px-4 py-3">
                                 <button
                                     onClick={() => { setSelected(item); seteditingStatus(true); }}
                                     className={`text-[11px] px-2.5 py-1 rounded-md border transition-all cursor-pointer
@@ -63,12 +73,37 @@ const GameTable = ({ data, setSelected, seteditingStatus }) => {
                                 >
                                     Editar
                                 </button>
+                                <button
+                                    onClick={() => setSelectedItem(item)}
+                                    className={`text-[11px] px-2.5 py-1 rounded-md border transition-all cursor-pointer
+                                    ${item.isActive
+                                        ? isDark
+                                            ? "border-white/7 text-gray-500 hover:border-red-500/40 hover:text-red-400 hover:bg-red-500/10"
+                                            : "border-gray-200 text-gray-500 hover:border-red-400 hover:text-red-500 hover:bg-red-50"
+                                            : isDark
+                                                ? "border-white/7 text-gray-500 hover:border-green-500/40 hover:text-green-400 hover:bg-green-500/10"
+                                                : "border-gray-200 text-gray-500 hover:border-green-400 hover:text-green-600 hover:bg-green-50"
+                                    }`}
+                                >
+                                    {item.isActive ? "Desactivar" : "Activar"}
+                                </button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
         </div>
+        <ConfirmModal
+            open={!!selectedItem}
+            title={selectedItem?.isActive ? "Desactivar elemento" : "Activar elemento"}
+            message={`¿Seguro que querés ${selectedItem?.isActive ? "desactivar" : "activar"} "${selectedItem?.nombre}"?`}
+            confirmText={selectedItem?.isActive ? "Desactivar" : "Activar"}
+            cancelText="Cancelar"
+            danger={selectedItem?.isActive}
+            onCancel={() => setSelectedItem(null)}
+            onConfirm={() => { handleActivate(selectedItem, activate); setSelectedItem(null); }}
+        />
+        </>
     );
 };
 

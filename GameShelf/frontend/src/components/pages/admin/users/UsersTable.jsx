@@ -75,7 +75,7 @@ const UsersTable = ({ data, setSelected, seteditingStatus, handleActivate, activ
                                         >
                                             Editar
                                         </button>
-                                        {item.role !== "admin" && (
+                                        {item.role !== 1 && (
                                             <button
                                                 onClick={() => setSelectedItem(item)}
                                                 className={`text-[11px] px-2.5 py-1 rounded-md border transition-all cursor-pointer

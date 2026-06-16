@@ -8,6 +8,8 @@ export const GenreProvider = ({ children }) => {
 
     const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState(false);
+    const [actionMessage, setActionMessage] = useState("");
 
     useEffect(() => {
 
@@ -32,6 +34,8 @@ export const GenreProvider = ({ children }) => {
     const createGenre = async (data) => {
                 try {
     
+                    setActionLoading(true);
+                    setActionMessage("Creando genero...");
                     const formData = new FormData();
     
                     formData.append("nombre", data.nombre);
@@ -49,12 +53,16 @@ export const GenreProvider = ({ children }) => {
                 } catch (error) {
                     console.error("Error en registro:", error);
                     return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+                }finally{
+                    setActionLoading(false);
                 }
     };
 
     const updateGenre = async (id, data) => {
                 try {
     
+                    setActionMessage("Actualizando genero...");
+                    setActionLoading(true);
                     const formData = new FormData();
     
                     formData.append("nombre", data.nombre);
@@ -83,12 +91,16 @@ export const GenreProvider = ({ children }) => {
                 } catch (error) {
                     console.error("Error en registro:", error);
                     return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+                }finally{
+                    setActionLoading(false);
                 }
     };
 
     const activateGenre = async (id, status) => {
                 try {
     
+                    setActionMessage(status ? "Activando genero..." : "Desactivando genero...");
+                    setActionLoading(true);
                     const formData = new FormData();
     
                     formData.append("isActive", status);
@@ -109,6 +121,8 @@ export const GenreProvider = ({ children }) => {
                 } catch (error) {
                     console.error("Error en registro:", error);
                     return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+                }finally {
+                    setActionLoading(false);
                 }
     };
 
@@ -117,6 +131,8 @@ export const GenreProvider = ({ children }) => {
             genres: activeGenres,
             allGenres,
             loading,
+            actionLoading,
+            actionMessage,
             createGenre,
             updateGenre,
             activateGenre

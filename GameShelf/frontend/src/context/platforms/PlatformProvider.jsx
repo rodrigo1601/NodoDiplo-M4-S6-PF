@@ -8,6 +8,8 @@ export const PlatformProvider = ({ children }) => {
 
     const [platforms, setPlatforms] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState(false);
+    const [actionMessage, setActionMessage] = useState("");
 
     useEffect(() => {
 
@@ -32,6 +34,8 @@ export const PlatformProvider = ({ children }) => {
     const createPlatform = async (data) => {
                     try {
         
+                        setActionLoading(true);
+                        setActionMessage("Creando plataforma...");
                         const formData = new FormData();
         
                         formData.append("nombre", data.nombre);
@@ -50,12 +54,16 @@ export const PlatformProvider = ({ children }) => {
                     } catch (error) {
                         console.error("Error en registro:", error);
                         return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+                    }finally{
+                        setActionLoading(false);
                     }
     };
 
     const updatePlatform = async (id, data) => {
                     try {
         
+                        setActionLoading(true);
+                        setActionMessage("Actualizando plataforma...");
                         const formData = new FormData();
         
                         formData.append("nombre", data.nombre);
@@ -85,12 +93,17 @@ export const PlatformProvider = ({ children }) => {
                     } catch (error) {
                         console.error("Error en registro:", error);
                         return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+                    } finally {
+                        setActionLoading(false);
                     }
     };
 
     const activatePlatform = async (id, status) => {
+
                     try {
         
+                        setActionMessage(status ? "Activando plataforma..." : "Desactivando plataforma...");
+                        setActionLoading(true);
                         const formData = new FormData();
         
                         formData.append("isActive", status);
@@ -111,6 +124,8 @@ export const PlatformProvider = ({ children }) => {
                     } catch (error) {
                         console.error("Error en registro:", error);
                         return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+                    } finally{
+                        setActionLoading(false)
                     }
     };
 
@@ -119,6 +134,8 @@ export const PlatformProvider = ({ children }) => {
             platforms: activePlatforms,
             allPlatforms,
             loading,
+            actionLoading,
+            actionMessage,
             createPlatform,
             updatePlatform,
             activatePlatform

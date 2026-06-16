@@ -4,7 +4,7 @@ import { useUserGames } from "../../../hooks/userGames/useUserGames";
 import { useAuth } from "../../../hooks/users/useAuth";
 import { useTheme } from "../../../hooks/useTheme";
 import { handleDeleteFromCollection } from "../../../utils/handleGame";
-import LoadingSpinner from "../../common/LoadingSpinnes";
+import LoadingSpinner from "../../common/LoadingSpinner";
 import ProfileHeader from "./ProfileHeader";
 import ProfileStats from "./ProfileStats";
 import ProfileSettings from "./ProfileSettings";

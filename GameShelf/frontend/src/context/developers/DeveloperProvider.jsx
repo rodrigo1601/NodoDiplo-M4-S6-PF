@@ -8,6 +8,8 @@ export const DeveloperProvider = ({ children }) => {
 
     const [developers, setDevelopers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState(false);
+    const [actionMessage, setActionMessage] = useState("");
 
     useEffect(() => {
 
@@ -33,6 +35,8 @@ export const DeveloperProvider = ({ children }) => {
     const createDeveloper = async (data) => {
             try {
 
+                setActionLoading(true);
+                setActionMessage("Creando desarrollador...");
                 const formData = new FormData();
 
                 formData.append("nombre", data.nombre);
@@ -49,12 +53,16 @@ export const DeveloperProvider = ({ children }) => {
             } catch (error) {
                 console.error("Error en registro:", error);
                 return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+            } finally {
+                setActionLoading(false);
             }
     };
 
     const updateDeveloper = async (id, data) => {
             try {
 
+                setActionLoading(true);
+                setActionMessage("Actualizando desarrollador...");
                 const formData = new FormData();
 
                 formData.append("nombre", data.nombre);
@@ -82,12 +90,16 @@ export const DeveloperProvider = ({ children }) => {
             } catch (error) {
                 console.error("Error en registro:", error);
                 return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+            } finally{
+                setActionLoading(false);
             }
     };
 
     const activateDeveloper = async (id, status) => {
                     try {
         
+                        setActionMessage(status ? "Activando desarrollador..." : "Desactivando desarrollador...");
+                        setActionLoading(true);
                         const formData = new FormData();
         
                         formData.append("isActive", status);
@@ -108,6 +120,8 @@ export const DeveloperProvider = ({ children }) => {
                     } catch (error) {
                         console.error("Error en registro:", error);
                         return { success: false, message: error.response?.data?.mensaje || "Error en registro" };
+                    } finally {
+                        setActionLoading(false);
                     }
     };
 
@@ -116,6 +130,8 @@ export const DeveloperProvider = ({ children }) => {
             developers: activeDevelopers,
             allDevelopers,
             loading,
+            actionLoading,
+            actionMessage,
             createDeveloper,
             updateDeveloper,
             activateDeveloper

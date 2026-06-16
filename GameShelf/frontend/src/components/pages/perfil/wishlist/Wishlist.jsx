@@ -4,7 +4,7 @@ import { useAuth } from "../../../../hooks/users/useAuth";
 import { useTheme } from "../../../../hooks/useTheme";
 import { handleDeleteFromCollection } from "../../../../utils/handleGame";
 import Sidebar from "../../../layout/Sidebar";
-import LoadingSpinner from "../../../common/LoadingSpinnes";
+import LoadingSpinner from "../../../common/LoadingSpinner";
 import { Link } from "react-router-dom";
 import GameWishlistCard from "../GameWishlistCard";
 import { usePagination } from "../../../../hooks/UsePagination";
